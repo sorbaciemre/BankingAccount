@@ -22,3 +22,20 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# IDE klasörleri ve dosyaları
+/.idea/
+/*.iml
+/.classpath
+/.project
+/.settings/
+/target/
+/out/
+*.log
+
+# Maven/Gradle klasörleri
+/.mvn/
+/.mvn/wrapper/maven-wrapper.jar
+/.gradle/
+/.gradle/
+/build/
