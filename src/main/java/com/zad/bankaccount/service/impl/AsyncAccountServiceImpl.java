@@ -7,6 +7,7 @@ import com.zad.bankaccount.exception.BankingNotFoundException;
 import com.zad.bankaccount.repository.AccountRepository;
 import com.zad.bankaccount.repository.UserRepository;
 import com.zad.bankaccount.service.AsyncAccountService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class AsyncAccountServiceImpl implements AsyncAccountService {
 
     @Override
     @Async
+    @Transactional
     public CompletableFuture<String> withdraw(String username, BigDecimal amount, String currency) {
         if (amount.compareTo(BigDecimal.ZERO) == 0)
             throw new BankingInsufficientBalanceException("Amount value should be greater than ZERO.");
@@ -42,6 +44,7 @@ public class AsyncAccountServiceImpl implements AsyncAccountService {
 
     @Override
     @Async
+    @Transactional
     public CompletableFuture<String> deposit(String username, BigDecimal amount, String currency) {
         if (amount.compareTo(BigDecimal.ZERO) == 0)
             throw new BankingInsufficientBalanceException("Amount value should be greater than ZERO.");

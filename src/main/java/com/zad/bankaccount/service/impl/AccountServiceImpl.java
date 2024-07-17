@@ -8,6 +8,7 @@ import com.zad.bankaccount.repository.AccountRepository;
 import com.zad.bankaccount.repository.UserRepository;
 import com.zad.bankaccount.service.AccountService;
 import com.zad.bankaccount.service.ConversionRateService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final ConversionRateService conversionRateService;
     @Override
+    @Transactional
     public void transfer(String fromUsername, String toUsername, BigDecimal amount, String currency) {
         if (amount.compareTo(BigDecimal.ZERO) == 0)
             throw new BankingInsufficientBalanceException("Amount value should be greater than ZERO.");
@@ -43,6 +45,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public void convert(String username, BigDecimal amount, String fromCurrency, String toCurrency) {
         if (amount.compareTo(BigDecimal.ZERO) == 0)
             throw new BankingInsufficientBalanceException("Amount value should be greater than ZERO.");
